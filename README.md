@@ -5,8 +5,8 @@ A [Cycle](https://github.com/staltz/cycle) driver for applications using [Socket
 ##Usage
 
 ``` javascript
-import Cycle from 'cyclejs';
-import SocketIO from 'cycle-socket.io';
+import Cycle from '@cycle/core';
+import {makeDOMDriver} from '@cycle/dom';
 
 var computer = function ({socketIO, dom}) {
     const vtree$ = render(dom);
@@ -23,7 +23,7 @@ var computer = function ({socketIO, dom}) {
 };
 
 var socketIODriver = SocketIO.createSocketIODriver(window.location.origin);
-var domDriver = Cycle.makeDOMDriver(document.body);
+var domDriver = makeDOMDriver(document.body);
 Cycle.run(computer, {
     dom: domDriver,
     socketIO: socketIODriver

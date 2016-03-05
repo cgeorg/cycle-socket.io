@@ -6,7 +6,9 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _cyclejs = require('cyclejs');
+var _rx = require('rx');
+
+var _rx2 = _interopRequireDefault(_rx);
 
 var _socketIoClient = require('socket.io-client');
 
@@ -16,7 +18,7 @@ function createSocketIODriver(url) {
     var socket = (0, _socketIoClient2['default'])(url);
 
     function get(eventName) {
-        return _cyclejs.Rx.Observable.create(function (observer) {
+        return _rx2['default'].Observable.create(function (observer) {
             var sub = socket.on(eventName, function (message) {
                 observer.onNext(message);
             });

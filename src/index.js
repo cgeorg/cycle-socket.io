@@ -1,4 +1,4 @@
-import { Rx } from 'cyclejs';
+import Rx from 'rx';
 import io from 'socket.io-client';
 
 function createSocketIODriver(url) {

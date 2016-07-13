@@ -14,8 +14,10 @@ var _socketIoClient = require('socket.io-client');
 
 var _socketIoClient2 = _interopRequireDefault(_socketIoClient);
 
-function createSocketIODriver(url) {
-    var socket = (0, _socketIoClient2['default'])(url);
+function createSocketIODriver(socket) {
+    if (typeof socket === 'string') {
+        socket = (0, _socketIoClient2['default'])(socket);
+    }
 
     function get(eventName) {
         return _rx2['default'].Observable.create(function (observer) {

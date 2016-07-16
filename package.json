@@ -1,7 +1,7 @@
 {
   "name": "cycle-socket.io",
-  "version": "2.0.0",
-  "description": "Minimum Viable Pizza",
+  "version": "2.0.1",
+  "description": "A socket.io plugin for Cycle.js",
   "main": "dist/script.js",
   "repository": "https://github.com/cgeorg/cycle-socket.io",
   "scripts": {

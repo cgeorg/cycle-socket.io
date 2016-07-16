@@ -1,8 +1,10 @@
 import Rx from 'rx';
 import io from 'socket.io-client';
 
-function createSocketIODriver(url) {
-    const socket = io(url);
+function createSocketIODriver(socket) {
+    if (typeof socket === 'string') {
+        socket = io(socket);
+    }
 
     function get(eventName) {
         return Rx.Observable.create(observer => {

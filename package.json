@@ -6,7 +6,8 @@
   "repository": "https://github.com/cgeorg/cycle-socket.io",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src/index.js --out-file dist/script.js"
+    "build": "babel src/index.js --out-file dist/script.js",
+    "prepublish": "npm run build"
   },
   "author": "Chris Marasti-Georg",
   "license": "ISC",

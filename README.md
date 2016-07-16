@@ -30,3 +30,9 @@ Cycle.run(computer, {
     socketIO: socketIODriver
 });
 ```
+
+##API
+
+### createSocketIODriver(socket|url)
+
+Creates a socket.io driver which uses the provided socket, or initializes a socket to the given url if a string is passed

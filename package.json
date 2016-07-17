@@ -3,6 +3,9 @@
   "version": "2.0.1",
   "description": "A socket.io plugin for Cycle.js",
   "main": "dist/script.js",
+  "files": [
+    "dist"
+  ],
   "repository": "https://github.com/cgeorg/cycle-socket.io",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

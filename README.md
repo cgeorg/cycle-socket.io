@@ -5,6 +5,7 @@ A [Cycle](https://github.com/staltz/cycle) driver for applications using [Socket
 ##Usage
 
 ``` javascript
+import io from 'socket.io-client';
 import {run} from '@cycle/xstream-run';
 import {makeDOMDriver} from '@cycle/dom';
 import {makeSocketIODriver} from 'cycle-socket.io';
@@ -21,7 +22,7 @@ function main({socketIO, dom}) {
     return {dom: vtree$, socketIO: outgoingMessages$}
 };
 
-var socketIODriver = makeSocketIODriver(window.location.origin);
+var socketIODriver = makeSocketIODriver(io(window.location.origin));
 var domDriver = makeDOMDriver(document.body);
 run(main, {
     dom: domDriver,

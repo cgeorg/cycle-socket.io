@@ -36,15 +36,6 @@ run(main, {
 
 Creates a socket.io driver which uses the provided socket to listen to and emit events.
 
-Note:
+### sources.get(eventName, { multiArgs = false })
 
-If the socket.io event listener gets more than one argument, it will be passed as an array to the stream handlers:
-
-```js
-socket.on('foo', (val1, val2) => { /* ... */ });
-
-function main({ socketIO }) {
-  const incomingMessages$ = socketIO.get('foo').map(([val1, val2]) => { /* ... */ });
-  // ...
-}
-```
+Returns a stream of `eventName` from the given `socket`. If the event expects multiple arguments from the Socket.IO server, pass in `multiArgs = true`, and the stream will emit an array with the arguments.

@@ -1,16 +1,12 @@
 import xs from 'xstream';
 
 export function makeSocketIODriver(socket) {
-    function get(eventName) {
+    function get(eventName, { multiArgs = false } = {}) {
         return xs.create({
             start(listener) {
-                this.eventListener = (message) => {
-                    if (args.length === 1) {
-                        listener.next(args[0]);
-                    } else {
-                        listener.next(args);
-                    }
-                };
+                this.eventListener = multiArgs
+                    ? (...args) => listener.next(args)
+                    : arg => listener.next(arg);
 
                 socket.on(eventName, this.eventListener);
             },

@@ -1,6 +1,6 @@
 import xs from 'xstream';
 
-function createSocketIODriver(socket) {
+export function makeSocketIODriver(socket) {
     function get(eventName) {
         return xs.create({
             start(listener) {
@@ -29,5 +29,3 @@ function createSocketIODriver(socket) {
         }
     };
 }
-
-export default {createSocketIODriver};

@@ -7,7 +7,7 @@ A [Cycle](https://github.com/staltz/cycle) driver for applications using [Socket
 ``` javascript
 import {run} from '@cycle/xstream-run';
 import {makeDOMDriver} from '@cycle/dom';
-import SocketIO from 'cycle-socket.io';
+import {makeSocketIODriver} from 'cycle-socket.io';
 
 function main({socketIO, dom}) {
     const vtree$ = render(dom);
@@ -21,7 +21,7 @@ function main({socketIO, dom}) {
     return {dom: vtree$, socketIO: outgoingMessages$}
 };
 
-var socketIODriver = SocketIO.createSocketIODriver(window.location.origin);
+var socketIODriver = makeSocketIODriver(window.location.origin);
 var domDriver = makeDOMDriver(document.body);
 run(main, {
     dom: domDriver,
@@ -31,6 +31,6 @@ run(main, {
 
 ##API
 
-### createSocketIODriver(socket)
+### makeSocketIODriver(socket)
 
 Creates a socket.io driver which uses the provided socket to listen to and emit events.

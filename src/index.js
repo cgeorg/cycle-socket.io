@@ -1,11 +1,6 @@
 import xs from 'xstream';
-import io from 'socket.io-client';
 
 function createSocketIODriver(socket) {
-    if (typeof socket === 'string') {
-        socket = io(socket);
-    }
-
     function get(eventName) {
         return xs.create({
             start(listener) {

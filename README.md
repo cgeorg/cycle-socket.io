@@ -31,6 +31,6 @@ run(main, {
 
 ##API
 
-### createSocketIODriver(socket|url)
+### createSocketIODriver(socket)
 
-Creates a socket.io driver which uses the provided socket, or initializes a socket to the given url if a string is passed
+Creates a socket.io driver which uses the provided socket to listen to and emit events.

@@ -5,7 +5,11 @@ export function makeSocketIODriver(socket) {
         return xs.create({
             start(listener) {
                 this.eventListener = (message) => {
-                    listener.next(message);
+                    if (args.length === 1) {
+                        listener.next(args[0]);
+                    } else {
+                        listener.next(args);
+                    }
                 };
 
                 socket.on(eventName, this.eventListener);

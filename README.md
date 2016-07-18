@@ -34,3 +34,16 @@ run(main, {
 ### makeSocketIODriver(socket)
 
 Creates a socket.io driver which uses the provided socket to listen to and emit events.
+
+Note:
+
+If the socket.io event listener gets more than one argument, it will be passed as an array to the stream handlers:
+
+```js
+socket.on('foo', (val1, val2) => { /* ... */ });
+
+function main({ socketIO }) {
+  const incomingMessages$ = socketIO.get('foo').map(([val1, val2]) => { /* ... */ });
+  // ...
+}
+```

@@ -5,27 +5,25 @@ A [Cycle](https://github.com/staltz/cycle) driver for applications using [Socket
 ##Usage
 
 ``` javascript
-import Cycle from '@cycle/core';
+import {run} from '@cycle/xstream-run';
 import {makeDOMDriver} from '@cycle/dom';
 import SocketIO from 'cycle-socket.io';
 
-var computer = function ({socketIO, dom}) {
+function main({socketIO, dom}) {
     const vtree$ = render(dom);
 
     const incomingMessages$ = socketIO.get('messageType');
-    const outgoingMessages$ = stream$.map( eventData => {
-      {
-        messageType: 'someEvent',
-        message: eventData
-      }
-    });
+    const outgoingMessages$ = stream$.map(eventData => ({
+      messageType: 'someEvent',
+      message: eventData,
+    }));
     
     return {dom: vtree$, socketIO: outgoingMessages$}
 };
 
 var socketIODriver = SocketIO.createSocketIODriver(window.location.origin);
 var domDriver = makeDOMDriver(document.body);
-Cycle.run(computer, {
+run(main, {
     dom: domDriver,
     socketIO: socketIODriver
 });

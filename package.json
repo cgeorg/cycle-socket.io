@@ -16,7 +16,7 @@
   "license": "ISC",
   "peerDependencies": {
     "socket.io-client": "^1.3.7",
-    "rx": "^4.0.7"
+    "xstream": "^5.2.1"
   },
   "devDependencies": {
     "babel": "^5.0.0"

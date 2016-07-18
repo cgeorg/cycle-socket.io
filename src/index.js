@@ -1,4 +1,4 @@
-import Rx from 'rx';
+import xs from 'xstream';
 import io from 'socket.io-client';
 
 function createSocketIODriver(socket) {
@@ -7,13 +7,18 @@ function createSocketIODriver(socket) {
     }
 
     function get(eventName) {
-        return Rx.Observable.create(observer => {
-            const sub = socket.on(eventName, function (message) {
-                observer.onNext(message);
-            });
-            return function dispose() {
-                sub.dispose();
-            };
+        return xs.create({
+            start(listener) {
+                this.eventListener = (message) => {
+                    listener.next(message);
+                };
+
+                socket.on(eventName, this.eventListener);
+            },
+            stop() {
+                socket.removeListener(eventName, this.eventListener);
+            },
+            eventListener: null,
         });
     }
 
@@ -22,7 +27,7 @@ function createSocketIODriver(socket) {
     }
 
     return function socketIODriver(events$) {
-        events$.forEach(event => publish(event.messageType, event.message));
+        events$.map(event => publish(event.messageType, event.message));
         return {
             get,
             dispose: socket.destroy.bind(socket)

@@ -5,27 +5,26 @@ A [Cycle](https://github.com/staltz/cycle) driver for applications using [Socket
 ##Usage
 
 ``` javascript
-import Cycle from '@cycle/core';
+import io from 'socket.io-client';
+import {run} from '@cycle/xstream-run';
 import {makeDOMDriver} from '@cycle/dom';
-import SocketIO from 'cycle-socket.io';
+import {makeSocketIODriver} from 'cycle-socket.io';
 
-var computer = function ({socketIO, dom}) {
+function main({socketIO, dom}) {
     const vtree$ = render(dom);
 
     const incomingMessages$ = socketIO.get('messageType');
-    const outgoingMessages$ = stream$.map( eventData => {
-      {
-        messageType: 'someEvent',
-        message: eventData
-      }
-    });
+    const outgoingMessages$ = stream$.map(eventData => ({
+      messageType: 'someEvent',
+      message: eventData,
+    }));
     
     return {dom: vtree$, socketIO: outgoingMessages$}
 };
 
-var socketIODriver = SocketIO.createSocketIODriver(window.location.origin);
+var socketIODriver = makeSocketIODriver(io(window.location.origin));
 var domDriver = makeDOMDriver(document.body);
-Cycle.run(computer, {
+run(main, {
     dom: domDriver,
     socketIO: socketIODriver
 });
@@ -33,6 +32,10 @@ Cycle.run(computer, {
 
 ##API
 
-### createSocketIODriver(socket|url)
+### makeSocketIODriver(socket)
 
-Creates a socket.io driver which uses the provided socket, or initializes a socket to the given url if a string is passed
+Creates a socket.io driver which uses the provided socket to listen to and emit events.
+
+### sources.get(eventName, { multiArgs = false })
+
+Returns a stream of `eventName` from the given `socket`. If the event expects multiple arguments from the Socket.IO server, pass in `multiArgs = true`, and the stream will emit an array with the arguments.

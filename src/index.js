@@ -22,7 +22,12 @@ export function makeSocketIODriver(socket) {
     }
 
     return function socketIODriver(events$) {
-        events$.map(event => publish(event.messageType, event.message));
+        events$.addListener({
+            next: event => publish(event.messageType, event.message),
+            error: console.error,
+            complete: () => {}
+        });
+
         return {
             get,
             dispose: socket.destroy.bind(socket)

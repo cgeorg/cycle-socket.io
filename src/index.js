@@ -24,7 +24,7 @@ export function makeSocketIODriver(socket) {
     return function socketIODriver(events$) {
         events$.addListener({
             next: event => publish(event.messageType, event.message),
-            error: console.error,
+            error: () => {},
             complete: () => {}
         });
 

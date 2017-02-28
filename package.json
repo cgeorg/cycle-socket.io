@@ -1,6 +1,6 @@
 {
   "name": "cycle-socket.io",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A socket.io plugin for Cycle.js",
   "main": "dist",
   "files": [
@@ -15,7 +15,7 @@
   "author": "Chris Marasti-Georg",
   "license": "ISC",
   "peerDependencies": {
-    "xstream": "^5.2.1"
+    "xstream": "^10"
   },
   "devDependencies": {
     "babel": "^5.0.0"

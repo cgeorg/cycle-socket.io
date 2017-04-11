@@ -1,8 +1,9 @@
 import xs from 'xstream';
+import {adapt} from '@cycle/run/lib/adapt';
 
 export function makeSocketIODriver(socket) {
     function get(eventName, { multiArgs = false } = {}) {
-        return xs.create({
+        const socketStream$ = xs.create({
             start(listener) {
                 this.eventListener = multiArgs
                     ? (...args) => listener.next(args)
@@ -15,6 +16,8 @@ export function makeSocketIODriver(socket) {
             },
             eventListener: null,
         });
+
+        return adapt(socketStream$);
     }
 
     function publish(messageType, message) {
@@ -23,9 +26,7 @@ export function makeSocketIODriver(socket) {
 
     return function socketIODriver(events$) {
         events$.addListener({
-            next: event => publish(event.messageType, event.message),
-            error: () => {},
-            complete: () => {}
+            next: event => publish(event.messageType, event.message)
         });
 
         return {

@@ -15,7 +15,7 @@
   "author": "Chris Marasti-Georg",
   "license": "ISC",
   "peerDependencies": {
-    "xstream": "^10"
+    "xstream": "*"
   },
   "devDependencies": {
     "babel": "^5.0.0"

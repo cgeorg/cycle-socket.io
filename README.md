@@ -2,7 +2,7 @@
 
 A [Cycle](https://github.com/staltz/cycle) driver for applications using [Socket.IO](http://socket.io/)
 
-##Usage
+## Usage
 
 ``` javascript
 import io from 'socket.io-client';
@@ -30,7 +30,7 @@ run(main, {
 });
 ```
 
-##API
+## API
 
 ### makeSocketIODriver(socket)
 
